@@ -1,0 +1,11 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<%- include('../partials/nav') %>
+
+<h1>Flights</h1>
+    <a href="/flights/<%= flight._id %>/edit">Edit</a>
+    <h2>Flight #<%= flight._id %> </h2>
+    <h3><%= flight.Flight %> </h3>
+    <a href="/flights">Go Back</a>
+
+<%- include('../partials/footer') %>

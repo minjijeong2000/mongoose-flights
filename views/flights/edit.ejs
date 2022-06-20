@@ -1,0 +1,10 @@
+<%- include('../partials/html-head') %>
+<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<%- include('../partials/nav') %>
+
+<h1>Edit flights</h1>
+<form action="/flights/<%= flight._id %>?_method=PUT" method="POST" autocomplete="off">
+    <input value="<%= flight.FLIGHT %>" type="text" name="flight">
+    <button type="submit">Save Flights</button>
+</form><br>
+<a href="/flights/<%= flight._id %>">Cancel</a>
