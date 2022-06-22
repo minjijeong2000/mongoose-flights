@@ -1,10 +1,28 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<link rel="stylesheet" href="/stylesheets/flights/index.css" />
 <%- include('../partials/nav') %>
 
-<h1>Edit flights</h1>
-<form action="/flights/<%= flight._id %>?_method=PUT" method="POST" autocomplete="off">
-    <input value="<%= flight.FLIGHT %>" type="text" name="flight">
-    <button type="submit">Save Flights</button>
-</form><br>
-<a href="/flights/<%= flight._id %>">Cancel</a>
+<main>
+    <h1><%= title %></h1>
+    <form id="new-form" action="/flights/<%= flight._id%>?_method=PUT" method="POST">
+      <select name="airline" id="airline-input">
+      <option value="American">American</option>
+        <option value="Southwest">Southwest</option>
+        <option value="United">United</option>
+      </select>
+      <select name="airport" id="airport-input">
+        <option value="AUS">AUS</option>
+          <option value="DFW">DFW</option>
+          <option value="DEN">DEN</option>
+          <option value="LAX">LAX</option>
+          <option value="SAN">SAN</option>
+        </select>
+      <label for="flightNo-input">Flight No.:</label>
+      <input type="number" name="flightNo" id="flightNo-input">
+      <label for="departs-input">Departs:</label>
+      <input type="date" name="departs" id="departs-input">
+      <button type="submit">Save Flight</button>
+    </form>
+  </main>
+
+  <%- include('../partials/footer') %>

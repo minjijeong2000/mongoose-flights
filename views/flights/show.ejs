@@ -1,11 +1,73 @@
 <%- include('../partials/html-head') %>
-<link rel="stylesheet" href="/stylesheets/movies/index.css" />
+<link rel="stylesheet" href="/stylesheets/flights/index.css" />
 <%- include('../partials/nav') %>
 
-<h1>Flights</h1>
-    <a href="/flights/<%= flight._id %>/edit">Edit</a>
-    <h2>Flight #<%= flight._id %> </h2>
-    <h3><%= flight.Flight %> </h3>
-    <a href="/flights">Go Back</a>
-
+<main>
+    <h1><%= title %></h1>
+    <section>
+      <div>Airline: </div>
+      <div>
+          <%= flight.airline %>
+          <a href="/flights/<%= flight._id %>/edit">
+              <button>Edit Flight</button>
+          </a>
+      </div>
+      <div>Airport: </div>
+      <div><%= flight.airport %></div>
+      <div>FlightNo: </div>
+      <div><%= flight.flightNo %></div>
+      <div>Departs: </div>
+      <div><%= flight.departs %></div>
+      <%# start cast list %>
+      <div>Meal:</div>
+      <ul>
+        <% flight.meals.forEach(meal => { %>
+          <li><%= meal.name %></li>
+        <% }) %>
+      </ul>
+    <%# end cast list %>
+</section>
+  <%# add to cast form below this comment %>
+  <form id="add-per-for-meal" action="/flights/<%= flight._id %>/meals" method="POST">
+      <select name="mealId">
+        <% meals.forEach(meal => { %>
+          <option value="<%= meal._id %>"><%= meal.name %></option>
+        <% }) %>
+      </select>
+      <button type="submit">Add the meal</button>
+    </form>
+  <h2>Add tickets</h2>
+<form 
+  id="add-ticket-form"
+  action="/flights/<%= flight._id %>/tickets"
+  method="POST"
+>
+  <label for="content-textarea">Seat:</label>
+  <input name="seat" required pattern="[A-F][1-9]\d?">
+  <label for="rating-select">Price:</label>
+  <input type="number" name="price" id="price-input">
+  <button type="submit">Add a ticket</button>
+</form>
+<% if (flight.tickets.length) { %> 
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Seat</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% flight.tickets.forEach(flight => { %>
+                <tr>
+                    <td><%= flight.createdAt.toLocaleDateString() %></td>
+                    <td><%= flight.seat %></td>
+                    <td><%= flight.price %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+<% } else { %>
+    <h3>No Tickets Yet</h3>
+<% } %> 
 <%- include('../partials/footer') %>
