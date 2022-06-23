@@ -16,8 +16,12 @@ function index (req, res) {
 }
 
 function newFlight (req, res) {
+    const newFlight = new Flight ()
+    const defaultDate = newFlight.departs
+    const formattedDate = defaultDate.toISOString().slice(0,16)
     res.render('flights/new', {
-        title: 'Add Flight'
+        title: 'Add Flight',
+        departs: formattedDate
     })
 }
 
